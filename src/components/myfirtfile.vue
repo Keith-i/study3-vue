@@ -2,6 +2,7 @@
 	<div>
 		<div class="mytemp">{{mytest}}</div>
 		<button @click='test'>测试</button>
+		<div class="mytest">我是测试文字</div>
 		<child-view></child-view>
 	</div>
 </template>
@@ -21,6 +22,7 @@ export default {
 	},
 	methods:{
 		test:function(){
+			$('.mytest').text('666')
 			alert('我是测试')
 		}
 	}
@@ -29,7 +31,7 @@ export default {
 
 <style scoped>
 	.mytemp{
-		font-size:16px;
+		font-size:0.2133rem;
 		color:lightskyblue;
 	}
 </style>

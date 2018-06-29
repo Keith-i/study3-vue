@@ -6,6 +6,9 @@
     	<li>
     		<router-link to="/myfirtfile">我第一个文件</router-link>
     	</li>
+    	<li>
+    		<router-link to="*">404</router-link>
+    	</li>
     </ul>
     <router-view/>
   </div>
