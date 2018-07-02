@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 // 自己的组件
 import myfirtfile from '@/components/myfirtfile'
 import undefineds from '@/components/404'
+import test1 from '@/components/test1'
 
 Vue.use(Router)
 
@@ -17,12 +18,15 @@ export default new Router({
     {
       path: '/',
       name: 'Hello',
-      component: HelloWorld
+      components: {
+      	default:HelloWorld,
+      	test1:test1
+      }
     },
     {
       path: '/myfirtfile',
       name: 'myfirtfile',
       component: myfirtfile
-    },
+    }
   ]
 })
