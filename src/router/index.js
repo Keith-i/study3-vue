@@ -12,7 +12,7 @@ export default new Router({
   	{
   		path:'*',
   		name:'undefineds',
-  		component:undefineds
+  		redirect:undefineds
   	},
     {
       path: '/',
