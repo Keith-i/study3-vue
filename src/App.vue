@@ -1,40 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>666</div>
-    <ul>
-    	<li>
-    		<router-link to="/index">首页</router-link>
-    	</li>
-    	<li>
-    		<router-link to="/myfirtfile">我第一个文件</router-link>
-    	</li>
-    	<li>
-    		<router-link to="/userCenter">个人中心</router-link>
-    	</li>
-    	<li>
-    		<router-link to="*">404</router-link>
-    	</li>
-    </ul>
-    <router-view></router-view>
-    <router-view class="view two" name="test1"></router-view>
+  	<div>
+  		<panel></panel>
+  	</div>
   </div>
 </template>
 
 <script>
+import panel from './search/searchPanel.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components:{
+  	panel:panel
+  }
 }
 </script>
 
 <style>
+html {
+  height: 100%;
+}
+body{
+	height: 100%;
+  background:url('./assets/images/background.png') no-repeat;
+  background-size: 100% 100%
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  width: 600px;
+  font-family: Source Sans Pro, Helvetica, sans-serif;
+  text-align: center;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -100px;
 }
 .two{
 	background:#ccc;

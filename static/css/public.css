@@ -1,0 +1,41 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+h1, h2, h3, h4, h5, h6,b,i{ font-weight:normal;font-style:normal;}
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+select,option{border:none;outline:none;}
+select{}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:none; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll; font-family: "微软雅黑"}
+a{-webkit-tap-highlight-color:transparent;}
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.renturntop{
+	position:relative;
+	height:54px;
+	border-bottom:2px solid #f2f2f2;
+}
+.iconleft{
+	position:absolute;
+	top:0;
+	left:10px;
+	width:30px;
+	height:100%;
+	background:url(../image/bg/leftarr.png) center center no-repeat;
+	background-size:80%;
+}
+.iconleft img{
+	display:block;
+	width:100%;
+}
+.renturntop h2{
+    font-size: 20px;
+    color: #333;
+    line-height:54px;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}

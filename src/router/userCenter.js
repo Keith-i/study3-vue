@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import hello from '@/components/HelloWorld'
+//import VueAxios from 'vue-axios'
+//import axios from 'axios'
 import index from '@/pages/index'
 import userCenter from '@/pages/userCenter'
 import userInfo from '@/pages/userInfo'
+
 
 Vue.use(Router)
 
