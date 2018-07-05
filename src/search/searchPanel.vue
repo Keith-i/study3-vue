@@ -2,12 +2,12 @@
 	<div>
 		<logo-select></logo-select>
 		<div class="search-input">
-			<input type="text" v-model='keyword' @keyup="get($event)">
-			<span class="search-reset">&times;</span>
+			<input type="text" v-model='keyword' @keyup="get($event)" @click="get($event,'climouse')" @keydown.down='selectDown()' @keydown.up.prevent='selectUp()'>
+			<span class="search-reset" @click='clearInput()'>&times;</span>
 			<button class="search-btn">搜一下</button>
-			<div class="search-select">
+			<div class="search-select" v-if='ifshow'>
 				<transition-group name="itemfade" tag='ul'>
-					<li v-for="(item,index) in myData" :key='index' class="search-select-option search-select-list" key=''>{{item}}</li>
+					<li v-for="(item,index) in myData" :key='index' :class="{selectback:index==now}" class="search-select-option search-select-list" @mouseover="selectHover(index)" @click="selectClick(index)">{{item}}</li>
 				</transition-group>
 			</div>
 		</div>
@@ -21,6 +21,8 @@
 			return{
 				myData:[],
 				keyword:'',//搜索内容
+				now:-1,
+				ifshow:true
 			}
 		},
 		components:{
@@ -28,8 +30,15 @@
 		},
 		methods:{
 			//搜索关键词联想
-			get:function(e){
-				console.log(e)
+			get:function(e,mouse){
+				// 如果按得键是上或者下，就不进行ajax
+	            if (e.keyCode == 38 || e.keyCode == 40) {
+	                return;
+	            }
+//	            console.log(e)
+				if(mouse == 'climouse'){
+					this.myData = []
+				}
 				var urls = 'https://sug.so.360.cn/suggest?word=' + this.keyword + '&encodein=utf-8&encodeout=utf-8'
 //				console.log(this.$http)
 //				console.log(this.axios)
@@ -37,6 +46,35 @@
 					console.log(res.data.s)
 					this.myData = res.data.s
 				})
+				this.ifshow = true;
+			},
+			selectHover:function(index){
+				this.now = index;
+			},
+			selectClick:function(index){
+				this.keyword = this.myData[index];
+				this.ifshow = false;
+			},
+			selectUp:function(){
+				console.log(this.now)
+				this.now--;
+				if(this.now <= -1){
+					this.now = this.myData.length-1;
+				}
+				this.keyword = this.myData[this.now]
+			},
+			selectDown:function(){
+				console.log(this.now)
+				console.log(this.myData.length)
+				this.now++;
+				if(this.now == this.myData.length){
+					this.now = 0;
+				}
+				this.keyword = this.myData[this.now]
+			},
+			clearInput:function(){
+				this.keyword = ''
+				this.myData = []
 			}
 		}
 	}
