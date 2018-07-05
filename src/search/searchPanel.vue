@@ -5,11 +5,11 @@
 			<input type="text" v-model='keyword' @keyup="get($event)">
 			<span class="search-reset">&times;</span>
 			<button class="search-btn">搜一下</button>
-		</div>
-		<div class="search-select">
-			<transition-group name="itemfade" tag='ul'>
-				<li class="search-select-option search-select-list" key=''>666</li>
-			</transition-group>
+			<div class="search-select">
+				<transition-group name="itemfade" tag='ul'>
+					<li v-for="(item,index) in myData" :key='index' class="search-select-option search-select-list" key=''>{{item}}</li>
+				</transition-group>
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,10 +31,11 @@
 			get:function(e){
 				console.log(e)
 				var urls = 'https://sug.so.360.cn/suggest?word=' + this.keyword + '&encodein=utf-8&encodeout=utf-8'
-				console.log(this.$http)
+//				console.log(this.$http)
 //				console.log(this.axios)
 				this.$http.jsonp(urls).then(function(res){
-					console.log(res)
+					console.log(res.data.s)
+					this.myData = res.data.s
 				})
 			}
 		}
@@ -42,7 +43,14 @@
 </script>
 
 <style scoped>
-.search-input {
+.search-input{
+	height: 45px;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 10px;
+    position: relative;
+}
+.search-input:first-child {
     height: 45px;
     width: 600px;
     margin: 0 auto;
