@@ -23,7 +23,7 @@ html {
 }
 body{
 	height: 100%;
-  background:url('./assets/images/background.png') no-repeat;
+  background:url('/static/images/background.png') no-repeat;
   background-size: 100% 100%
 }
 #app {

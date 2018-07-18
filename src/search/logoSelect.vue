@@ -1,7 +1,7 @@
 <template>
 	<!--选择浏览器组件-->
 	<div class="main-logo">
-		<img src="../assets/images/360_logo.png" />
+		<img src="/static/images/360_logo.png" />
 		<span class="logoList-arrow"></span>
 		<!--<transition name='logofade'>
 			<ul class="logoList">
@@ -10,13 +10,26 @@
 				</li>
 			</ul>
 		</transition>-->
+		<transition name='logofade'>
+			<ul class="logoList">
+				<li class="logoItem" v-for='(item,index) in logoData' :key="index">
+					<img :src="item.imgSrc" />
+				</li>
+			</ul>
+		</transition>
 	</div>
 </template>
 
 <script>
 	export default{
 		data(){
-			return{}
+			return{
+				logoData:[
+					{imgSrc:'/static/images/360_logo.png'},
+					{imgSrc:'/static/images/baidu_logo.png'},
+					{imgSrc:'/static/images/sougou_logo.png'}
+				]
+			}
 		}
 	}
 </script>
