@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<logo-select></logo-select>
+		<logo-select :link-url='parlinkurl' @sellink='parsellink'></logo-select>
 		<div class="search-input">
 			<input type="text" v-model='keyword' @keyup="get($event)" @click="get($event,'climouse')" @keydown.down='selectDown()' @keydown.up.prevent='selectUp()'>
 			<span class="search-reset" @click='clearInput()'>&times;</span>
-			<button class="search-btn">搜一下</button>
+			<button class="search-btn" @click='search()'>搜一下</button>
 			<div class="search-select" v-if='ifshow'>
 				<transition-group name="itemfade" tag='ul'>
 					<li v-for="(item,index) in myData" :key='index' :class="{selectback:index==now}" class="search-select-option search-select-list" @mouseover="selectHover(index)" @click="selectClick(index)">{{item}}</li>
@@ -22,7 +22,8 @@
 				myData:[],
 				keyword:'',//搜索内容
 				now:-1,
-				ifshow:true
+				ifshow:true,
+				parlinkurl:'https://www.so.com/s?ie=utf-8&shb=1&src=360sou_newhome&q='
 			}
 		},
 		components:{
@@ -75,7 +76,15 @@
 			clearInput:function(){
 				this.keyword = ''
 				this.myData = []
-			}
+			},
+			parsellink:function(childdata){
+				this.parlinkurl = childdata.linkdata;
+				console.log(childdata)
+			},
+			search: function() {
+	            //打开对应的搜索界面
+	            window.open(this.parlinkurl + this.keyword);
+	        },
 		}
 	}
 </script>

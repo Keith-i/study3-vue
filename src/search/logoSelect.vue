@@ -1,35 +1,56 @@
 <template>
 	<!--选择浏览器组件-->
-	<div class="main-logo">
-		<img src="/static/images/360_logo.png" />
-		<span class="logoList-arrow"></span>
-		<!--<transition name='logofade'>
-			<ul class="logoList">
-				<li class="logoItem">
-					<img src="../assets/images/360_logo.png">
-				</li>
-			</ul>
-		</transition>-->
-		<transition name='logofade'>
-			<ul class="logoList">
-				<li class="logoItem" v-for='(item,index) in logoData' :key="index">
-					<img :src="item.imgSrc" />
-				</li>
-			</ul>
-		</transition>
+	<div>
+		<div class="main-logo">
+			<text>{{linkUrl}}</text>
+			<img :src="logoData[selectedNow].imgSrc" @click="toggleFlag"/>
+			<span class="logoList-arrow"></span>
+			<transition name='logofade'>
+				<ul class="logoList" v-show='mouseLeaveFlag' @mouseleave="mouseLeaveList">
+					<li class="logoItem" v-for='(item,index) in logoData' :key="index" @mousemove="logoListHover(index)" :class="{selectback:logoNow==index}" @click="logoSelected(index)">
+						<img :src="item.imgSrc" />
+					</li>
+				</ul>
+			</transition>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default{
+		props:['linkUrl'],
 		data(){
 			return{
+				selectedNow:0,
+				mouseLeaveFlag:false,
+				logoNow:-1,
 				logoData:[
-					{imgSrc:'/static/images/360_logo.png'},
-					{imgSrc:'/static/images/baidu_logo.png'},
-					{imgSrc:'/static/images/sougou_logo.png'}
+					{imgSrc:'/static/images/360_logo.png',linkdata:'https://www.so.com/s?ie=utf-8&shb=1&src=360sou_newhome&q=',name:'360搜索'},
+					{imgSrc:'/static/images/baidu_logo.png',linkdata:'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=',name:'百度搜索'},
+					{imgSrc:'/static/images/sougou_logo.png',linkdata:'https://www.sogou.com/web?query=',name:'搜狗搜索'}
 				]
 			}
+		},
+		methods:{
+			toggleFlag:function(){
+				this.mouseLeaveFlag = !this.mouseLeaveFlag;
+//				this.mouseLeaveFlag = true;
+			},
+			logoListHover:function(index){
+				this.logoNow = index;
+			},
+			logoSelected:function(index){
+				this.selectedNow = index;
+				this.mouseLeaveFlag = false;
+				this.$emit('sellink',this.logoData[index]);
+			},
+			//鼠标离开事件
+			mouseLeaveList:function(){
+				this.mouseLeaveFlag=false;
+			}
+		},
+		mounted:function(){
+			console.log(this.linkUrl)
 		}
 	}
 </script>
